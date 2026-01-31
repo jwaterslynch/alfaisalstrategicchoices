@@ -578,9 +578,7 @@
             }
         });
 
-        const copyText = quotes.join('
-
-');
+        const copyText = quotes.join('\n\n');
         navigator.clipboard.writeText(copyText).then(() => {
             const btn = document.getElementById('copyBtn');
             btn.classList.add('copied');
