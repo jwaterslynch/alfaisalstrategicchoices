@@ -19,6 +19,11 @@
         .code-bar { transition: all 0.2s; cursor: pointer; border-radius: 4px; }
         .code-bar:hover { transform: scaleX(1.02); filter: brightness(1.1); }
         .code-bar.selected { outline: 3px solid #1e40af; outline-offset: 2px; }
+        .codes-scroll { max-height: calc(100vh - 180px); overflow-y: auto; }
+        .codes-scroll::-webkit-scrollbar { width: 6px; }
+        .codes-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .codes-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
         .response-card { border-left: 4px solid #e5e7eb; transition: all 0.2s; cursor: pointer; }
         .response-card:hover { border-left-color: #3b82f6; background: #f8fafc; }
         .code-tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; margin: 2px; cursor: pointer; transition: all 0.2s; }
@@ -425,7 +430,7 @@
                         <div class="card p-4 sticky top-20">
                             <h3 class="text-lg font-semibold mb-1">${q.id}: ${escapeHtml(q.title)}</h3>
                             <p class="text-sm text-gray-500 mb-4">${q.total} responses | Click bar to filter, click code tag to highlight</p>
-                            <div class="space-y-2">
+                            <div class="space-y-2 codes-scroll">
                                 ${q.codes.map((c, i) => `
                                     <div class="code-bar p-2 ${selectedCode === c.name ? 'selected bg-blue-50' : 'hover:bg-gray-50'}" onclick="selectCode('${escapeJs(c.name)}')">
                                         <div class="flex justify-between text-sm mb-1">
