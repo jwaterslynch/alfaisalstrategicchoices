@@ -679,6 +679,41 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
+    
+    // Password protection
+    const P = ['A','l','f','a','i','s','a','l','2','0','2','6'].join('');
+    
+    function checkPassword(event) {
+        event.preventDefault();
+        const input = document.getElementById('passwordInput').value;
+        
+        if (input === P) {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('locked');
+            sessionStorage.setItem('alfaisalAuth', 'true');
+            return false;
+        } else {
+            document.getElementById('loginError').style.display = 'block';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+            return false;
+        }
+    }
+    
+    // Check if already authenticated in this session
+    if (sessionStorage.getItem('alfaisalAuth') === 'true') {
+        document.getElementById('loginOverlay').classList.add('hidden');
+        document.getElementById('mainApp').classList.remove('locked');
+    }
+    
+    // Focus password input on load
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!sessionStorage.getItem('alfaisalAuth')) {
+            const pwInput = document.getElementById('passwordInput');
+            if (pwInput) pwInput.focus();
+        }
+    });
+
     </script>
     </div>
 </body>
